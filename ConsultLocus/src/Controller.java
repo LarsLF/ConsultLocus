@@ -18,8 +18,8 @@ public class Controller {
 			System.out.println("2: Search for a profile");
 			System.out.println("3: List all consultants");
 			System.out.println("4: Create consultant");
-			System.out.println("5: Delete consultent");
-			System.out.println("6: Update consultent");
+			System.out.println("5: Delete consultant");
+			System.out.println("6: Update consultant");
 
 			switch (input.nextInt()) 
 			
