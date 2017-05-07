@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class DbConnection {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/ConsultLocus";
+	private static final String URL = "jdbc:mysql://localhost:3306/ConsultLocus?autoReconnect=true&useSSL=false";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "Lars";
 
@@ -153,11 +153,17 @@ public class DbConnection {
 		} 
 	}
 		
-		public static boolean updateConsultentInfo(int id, String password){
+		public static boolean updateConsultentInfo(int id, String profile, String available, int price, int salary, String password, String sprog, String certificates){
 			try {
-				java.sql.PreparedStatement updateConsultentInfo = connection.prepareStatement("UPDATE consultants SET password = ? WHERE id = ?");
-				updateConsultentInfo.setString(1, password);
-				updateConsultentInfo.setInt(2, id);
+				java.sql.PreparedStatement updateConsultentInfo = connection.prepareStatement("UPDATE consultants SET profile = ?, available = ?, price = ?, salary = ?, password = ?, sprog = ?, certificates = ? WHERE id = ?");
+				updateConsultentInfo.setInt(8, id);
+				updateConsultentInfo.setString(1, profile);
+				updateConsultentInfo.setString(2, available);
+				updateConsultentInfo.setInt(3, price);
+				updateConsultentInfo.setInt(4, salary);
+				updateConsultentInfo.setString(5, password);
+				updateConsultentInfo.setString(6, sprog);
+				updateConsultentInfo.setString(7, certificates);
 				
 				int rowsAffected = updateConsultentInfo.executeUpdate();
 				

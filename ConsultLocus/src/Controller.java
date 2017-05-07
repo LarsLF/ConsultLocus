@@ -13,7 +13,7 @@ public class Controller {
 	private static void menu() {
 
 		do {
-			System.out.println("What do your want to do?");
+			System.out.println("What do your want to do? \n");
 			System.out.println("1: Search for a consultant");
 			System.out.println("2: Search for a profile");
 			System.out.println("3: List all consultants");
@@ -134,20 +134,33 @@ public class Controller {
 	}
 
 	private static void updateConsultentInfo() {
-		String name, password;
-		int id;
+		String profile, available, password, sprog, certificates;
+		int id, price, salary;
 		
 		System.out.println("Please enter id of the user you want to update: ");
 		id = input.nextInt();
+		System.out.println("Please enter a new profile: ");
+		profile = input.next();
+		System.out.println("Please enter a new available: ");
+		available = input.next();
+		System.out.println("Please enter a new price: ");
+		price = input.nextInt();
+		System.out.println("Please enter a new salary: ");
+		salary = input.nextInt();
 		System.out.println("Please enter a new password: ");
 		password = input.next();
+		System.out.println("Please enter a new sprog: ");
+		sprog = input.next();
+		System.out.println("Please enter a new certificates: ");
+		certificates = input.next();
 		
-		boolean approved = DbConnection.updateConsultentInfo(id, password);
+		
+		boolean approved = DbConnection.updateConsultentInfo(id, profile, available, price, salary, password, sprog, certificates);
 		if(approved){
-			System.out.println("Password updated \n");
+			System.out.println("Consultant updated \n");
 		}
 		else{
-			System.out.println("Couldnt update password \n");
+			System.out.println("Couldnt update consultant \n");
 		}
 	}
 	
