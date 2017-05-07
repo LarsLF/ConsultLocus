@@ -71,9 +71,7 @@ public class DbConnection {
 				java.sql.PreparedStatement getUser = connection.prepareStatement("SELECT * from consultants WHERE profile LIKE ?");
 				getUser.setString(1, "%" + profile + "%");
 
-
-				resultSet = getUser.executeQuery();
-				
+				resultSet = getUser.executeQuery();				
 				users = new ArrayList<User>();
 
 				while (resultSet.next())
@@ -124,37 +122,44 @@ public class DbConnection {
 			}
 			return users;
 		}
-		/*
-		public static void createUser(String name, String password) {
+		
+		public static void createConsultent(String profile, String name, String avaliable, int price, int salary, String password, String sprog, String certificates) {
 
 			try {
-				java.sql.PreparedStatement createUser = connection.prepareStatement("insert into customers (name, password) values (?, ?)");
-				createUser.setString(1, name);
-				createUser.setString(2, password);
-				createUser.executeUpdate();
+				java.sql.PreparedStatement createConsultent = connection.prepareStatement("insert into consultants (profile, name, available, price, salary, password, sprog, certificates) values (?, ?, ?, ?, ?, ?, ?, ?)");
+				createConsultent.setString(1, profile);
+				createConsultent.setString(2, name);
+				createConsultent.setString(3, avaliable);
+				createConsultent.setInt(4, price);
+				createConsultent.setInt(5, salary);
+				createConsultent.setString(6, password);
+				createConsultent.setString(7, sprog);
+				createConsultent.setString(8, certificates);
+				createConsultent.executeUpdate();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
 		}	
 			
-		public static void deleteUser(String name){
+		public static void deleteConsultent(String id){
 			try{
-			java.sql.PreparedStatement deleteUser = connection.prepareStatement("DELETE from customers WHERE name = ?");
-			deleteUser.setString(1, name);
-			deleteUser.executeUpdate();
+			java.sql.PreparedStatement deleteConsultent = connection.prepareStatement("DELETE from consultants WHERE id = ?");
+			deleteConsultent.setString(1, id);
+			deleteConsultent.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
 	}
-		public static boolean updateUserInfo(String name, String password){
+		
+		public static boolean updateConsultentInfo(int id, String password){
 			try {
-				java.sql.PreparedStatement updateUserInfo = connection.prepareStatement("UPDATE customers SET password = ? WHERE name = ?");
-				updateUserInfo.setString(1, password);
-				updateUserInfo.setString(2, name);
+				java.sql.PreparedStatement updateConsultentInfo = connection.prepareStatement("UPDATE consultants SET password = ? WHERE id = ?");
+				updateConsultentInfo.setString(1, password);
+				updateConsultentInfo.setInt(2, id);
 				
-				int rowsAffected = updateUserInfo.executeUpdate();
+				int rowsAffected = updateConsultentInfo.executeUpdate();
 				
 				if(rowsAffected == 0){
 					return false;
@@ -166,7 +171,10 @@ public class DbConnection {
 			
 				return true;
 		}
-*/
+
+		
+		
+		
 	/**
 	 * Method used to close the database connection
 	 */

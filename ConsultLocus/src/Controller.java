@@ -17,10 +17,9 @@ public class Controller {
 			System.out.println("1: Search for a consultant");
 			System.out.println("2: Search for a profile");
 			System.out.println("3: List all consultants");
-			/*
-			System.out.println("4: Delete user");
-			System.out.println("5: Update user info");
-			*/
+			System.out.println("4: Create consultant");
+			System.out.println("5: Delete consultent");
+			System.out.println("6: Update consultent");
 
 			switch (input.nextInt()) 
 			
@@ -36,18 +35,21 @@ public class Controller {
 			case 3:
 				getAllUsers();
 				break;
-				/*
+				
 			case 4:
-				deleteUser();
+				createConsultent();
 				break;
-
+				
 			case 5:
-				updateUserInfo();
+				deleteConsultent();
 				break;
-				*/
-
+			
+			case 6: 
+				updateConsultentInfo();
+				break;
+				
 			default:
-				System.out.println("Only 1-3");
+				System.out.println("Only 1-6");
 				break;
 			}
 		} while (true);
@@ -78,64 +80,76 @@ public class Controller {
 	private static void getUsers() {
 		System.out.println("Profile: ");
 		String profile = input.next();
-		ArrayList<User> users = DbConnection.getUsers(profile);
-		
-	
+
 		for (User user : DbConnection.getUsers(profile)) {
 			System.out.println("Users found: \n\n" + "Profil: " + user.getProfile() + "\nNavn: " + user.getName() + "\n");
 		}
-		
 	}
+	
 
 	private static void getAllUsers() {
 		String profile = input.nextLine();
 		ArrayList<User> users = DbConnection.getUsers(profile);
 		System.out.println("** Users found **");
+		
 		for (User user : DbConnection.getUsers(profile)) {
 			System.out.println("Profil: " + user.getProfile() + "\nNavn: " + user.getName() + "\n");
 		}
 		
 	}
 	
-	/*
-	private static void createUser()  {
+	
+	private static void createConsultent()  {
 		
-		System.out.println("Please enter the name of the person you want to create: ");
+		System.out.println("Please enter the profile of the consultent you want to create: ");
+		String profile = input.next();
+		System.out.println("Please enter the name of the consultent: ");
 		String name = input.next();
-		System.out.println("Please enter the password of the person you want to have: ");
+		System.out.println("Is the consultent available: yes/no?");
+		String available = input.next();
+		System.out.println("Please enter the hourly price of the consultent");
+		int price = input.nextInt();
+		System.out.println("Please enter the salary of which Consultlocus requestst: ");
+		int salary = input.nextInt();
+		System.out.println("Please enter the password of the consultent: ");
 		String password = input.next();
+		System.out.println("Please enter the languege of which the consultent speaks: ");
+		String sprog = input.next();
+		System.out.println("Please enter the consultents existing certificates: ");
+		String certificates = input.next();
 		
-		DbConnection.createUser(name, password);
+		DbConnection.createConsultent(profile, name, available, price, salary, password, sprog, certificates);
 		
 		System.out.println("The person has now been created");
 	
 	}
 
-	private static void deleteUser() {
-		System.out.println("Please enter the name of the person you want to delete");
-		String name = input.next();
+	private static void deleteConsultent() {
+		System.out.println("Please enter the id of the consultent you want to delete: ");
+		String id = input.next();
 		
-		DbConnection.deleteUser(name);
+		DbConnection.deleteConsultent(id);
 		
-		System.out.println("The person has now been deleted from the system");
+		System.out.println("The person has now been deleted from the system \n");
 	}
 
-	private static void updateUserInfo() {
+	private static void updateConsultentInfo() {
 		String name, password;
+		int id;
 		
-		System.out.println("Please enter name of the user you want to update: ");
-		name = input.next();
+		System.out.println("Please enter id of the user you want to update: ");
+		id = input.nextInt();
 		System.out.println("Please enter a new password: ");
 		password = input.next();
 		
-		boolean approved = DbConnection.updateUserInfo(name, password);
+		boolean approved = DbConnection.updateConsultentInfo(id, password);
 		if(approved){
-			System.out.println("Password updated");
+			System.out.println("Password updated \n");
 		}
 		else{
-			System.out.println("Couldnt update password");
+			System.out.println("Couldnt update password \n");
 		}
 	}
-	*/
+	
 }
 
